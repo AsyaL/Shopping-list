@@ -23,12 +23,16 @@
 							item: 'orange',
 						},
 						{
-							category: 'food',
-							item: 'bred',
+							category: 'forHome',
+							item: 'shampoo',
 						},
 						{
 							category: 'food',
 							item: 'cherry',
+						},
+												{
+							category: 'other',
+							item: 'glass',
 						},
 					],
 				}
