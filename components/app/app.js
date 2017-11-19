@@ -8,44 +8,47 @@
 
 	class App {
 		constructor({el}) {
-			const menu = new List({
+			this.menu = new List({
 				el: document.querySelector('.js-menu'),
 
-				data: {
-					title: 'Shopping list',
-					items: [
-						{
-							category: 'food',
-							item: 'milk',
-						},
-						{
-							category: 'food',
-							item: 'orange',
-						},
-						{
-							category: 'forHome',
-							item: 'shampoo',
-						},
-						{
-							category: 'food',
-							item: 'cherry',
-						},
-												{
-							category: 'other',
-							item: 'glass',
-						},
-					],
-				}
-
-				
+				data: {},	
 			});
 
-			const form = new AddItem({
+			this.form = new AddItem({
 				el: el.querySelector('.form_add-item'),
 			});
 
-			window.menu = menu;
+		const promise = this.fetchData();
+
+		promise.then((result) => {
+			this.menu.setData(result)
+		});
+
+		promise.then((result));
+		promise.then();
 		}
+
+		fetchData() {
+return new Promise((resolve, reject) => { 
+		const xhr = new XMLHttpRequest(); 
+
+xhr.addEventListener('load', () => {
+					if (xhr.status === 200) {
+						const result = JSON.parse(xhr.responseText);
+
+						resolve(result);
+					} else {
+						console.error('Что-то пошло не так!');
+
+						reject(xhr);
+					}
+				});
+
+		xhr.open('GET', '/data/data.json',true);
+		xhr.send();
+});
+		}
+
 	}
 
 	// export

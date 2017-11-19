@@ -1,0 +1,24 @@
+{
+	"title": "Shopping list",
+	"items": [{
+			"category": "food",
+			"item": "milk"
+		},
+		{
+			"category": "food",
+			"item": "orange"
+		},
+		{
+			"category": "forHome",
+			"item": "hampoo"
+		},
+		{
+			"category": "food",
+			"item": "cherry"
+		},
+		{
+			"category": "other",
+			"item": "glass"
+		}
+	]
+}
