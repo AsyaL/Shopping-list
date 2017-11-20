@@ -4,10 +4,16 @@ var config = {
   app: "./components/app/app"
   },
  
-   output: {
+  output: {
       path: __dirname +'/prod',
       filename: '[name].js',
-   },   
+  },   
+
+  watch: true,
+
+  watchOptions: {
+    aggregateTimeout: 200
+  },
 
   module: {
     loaders: [

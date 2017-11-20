@@ -14,6 +14,7 @@ console.log(data)
 
 			const form = new AddItem({
 				el: el.querySelector('.form_add-item'),
+				data: data
 			});
 		}
 	}
