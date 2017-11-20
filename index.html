@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    
-    <link rel="stylesheet" href="components/list/style.css">
-  </head>
+<head>
+  <link rel="stylesheet" href="components/list/style.css">
+</head>
 
-  <body>
+<body>
+  <div class=" menu js-app">
+    <div class="js-menu"></div>
+    <div class="form_add-item"></div>
+  </div>
+  <script src="prod/app.js"></script>
+</body>
 
-<div class=" menu js-app">
-  <div class="js-menu"></div>
-  <div class="form_add-item"></div>
-</div>
-
-
-  <script src="components/list/listItem.js"></script>
-  <script src="components/addItem/addItem.js"></script>
-  <script src="components/app/app.js"></script>
-    <script >
-    	'use strict';
-	new window.App({
-		el: document.querySelector('.js-app')
-	});
-
-    </script>
-  </body>
- </html> 
+</html>
