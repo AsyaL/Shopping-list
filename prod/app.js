@@ -78,38 +78,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-console.log(__WEBPACK_IMPORTED_MODULE_2__data_data_json___default.a);
 class App {
-	constructor({ el }) {
-		const menu = new __WEBPACK_IMPORTED_MODULE_0__list_list__["a" /* default */]({
-			el: document.querySelector('.js-menu'),
-			data: __WEBPACK_IMPORTED_MODULE_2__data_data_json___default.a
-		});
-
-		const form = new __WEBPACK_IMPORTED_MODULE_1__addItem_addItem__["a" /* default */]({
-			el: el.querySelector('.form_add-item'),
-			data: __WEBPACK_IMPORTED_MODULE_2__data_data_json___default.a
-		});
-	}
-}
-
-// export
-const app = new App({
-	el: document.querySelector('.js-app')
-});
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class List {
-
-    constructor(options) {
-        this.el = options.el;
-        this.data = options.data;
+    constructor({ el }) {
+        this.data = __WEBPACK_IMPORTED_MODULE_2__data_data_json___default.a;
+        this.el = el;
+        this.newItem = { "category": " ",
+            "item": " "
+        };
         this._initEvents();
-        this.render();
+        this.menu = new __WEBPACK_IMPORTED_MODULE_0__list_list__["a" /* default */]({
+            el: document.querySelector('.js-menu'),
+            data: this.data
+        });
+
+        this.form = new __WEBPACK_IMPORTED_MODULE_1__addItem_addItem__["a" /* default */]({
+            el: el.querySelector('.form_add-item')
+        });
     }
 
     _initEvents() {
@@ -131,16 +115,56 @@ class List {
         if (target.classList.contains('buttom_ok')) {
             this.okClick(target.dataset.id);
         }
+
+        if (target.classList.contains('add_item-button')) {
+            this.newItem.category = document.getElementById("itemCategory").value;
+            this.newItem.item = document.getElementById("itemName").value;
+            this.addNewItem();
+        }
     }
 
     deleteClick(id) {
         this.data.items.splice(id, 1);
-        this.render();
+        this.menu.render();
     }
 
     okClick(id) {
-        var elements = document.querySelectorAll('ul > li > div');
+        let elements = document.querySelectorAll('ul > li > div');
         elements[id].classList.toggle('menu__item-ok');
+    }
+
+    addNewItem() {
+        this.data.items.push(this.newItem);
+        this.menu.render();
+        this.newItem = { "category": " ",
+            "item": " "
+        };
+        document.getElementById("itemCategory").value = "";
+        document.getElementById("itemName").value = "";
+    }
+
+    toggle() {
+        this.el.classList.toggle('menu_close');
+    }
+
+}
+
+// export
+const app = new App({
+    el: document.querySelector('.js-app')
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class List {
+
+    constructor(options) {
+        this.el = options.el;
+        this.data = options.data;
+        this.render();
     }
 
     render() {
@@ -195,9 +219,6 @@ class List {
         this.el.appendChild(list);
     }
 
-    toggle() {
-        this.el.classList.toggle('menu_close');
-    }
 }
 
 // Export
@@ -210,48 +231,23 @@ class List {
 "use strict";
 class AddItem {
 
-				constructor({ el, data }) {
-								this.el = el;
-								this.data = data;
-								this.newItem = {
-												"category": " ",
-												"item": " "
-								};
+	constructor({ el, data }) {
+		this.el = el;
+		this.render();
+	}
 
-								this._initEvents();
-								this.render();
-				}
-
-				_initEvents() {
-								this.el.addEventListener('submit', this._onSubmit.bind(this));
-				}
-
-				_onSubmit(event) {
-								event.preventDefault();
-								this.addNewItem();
-				}
-
-				addNewItem() {
-								this.newItem.category = document.getElementById("itemCategory").value;
-								this.newItem.item = document.getElementById("itemName").value;
-								console.log(this.newItem);
-								this.data.items.push(this.newItem);
-								console.log(this.data);
-				}
-
-				render() {
-								this.el.innerHTML = `
+	render() {
+		this.el.innerHTML = `
 			<form>
-			   <input name="name" placeholder="Product Name" class="add_item-input" id="itemName" required />
+			   <input name="name" placeholder="Product Name" class="add_item-input" id="itemName" required  autocomplete="off"/>
 			   <select name="category" class="add_item-input" id="itemCategory" required>
-			    	<option>category</option>
 	   				<option value="food">food</option>
-	    			<option value="home good">home goods</option>
+	    			<option value="forHome">home goods</option>
 	    			<option value="other">other</option>
    				</select>
 			   <input name="submit" class="add_item-button" type="submit" value="Add" />
 			<form>`;
-				}
+	}
 }
 
 // Export

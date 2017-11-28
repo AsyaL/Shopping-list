@@ -12,7 +12,7 @@ var config = {
   watch: true,
 
   watchOptions: {
-    aggregateTimeout: 200
+    aggregateTimeout: 100
   },
 
   module: {
