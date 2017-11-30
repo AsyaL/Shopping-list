@@ -10,12 +10,12 @@ class List {
         this.el.innerHTML = '';
 
         let title = document.createElement('a');
-        title.classList.add('menu__title');
-        title.classList.add('menu__title-text');
+        title.classList.add('menu_title');
+        title.classList.add('menu_title-text');
         title.innerHTML = this.data.title;
 
         let list = document.createElement('ul');
-        list.classList.add('menu__list');
+        list.classList.add('menu_list');
 
         let arrItem = this.data.items;
         arrItem.sort(function (a, b) {
@@ -46,7 +46,7 @@ class List {
 	            item.appendChild(imgItem);
 
             let itemName = document.createElement('div');
-	            itemName.classList.add('menu__item');
+	            itemName.classList.add('menu_item');
 	            itemName.innerHTML = itemData.item;
 	            item.appendChild(itemName);
 

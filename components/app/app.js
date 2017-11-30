@@ -30,7 +30,7 @@ import data from '../../data/data.json';
         event.preventDefault();
         let target = event.target;
 
-        if (target.classList.contains('menu__title')) {
+        if (target.classList.contains('menu_title')) {
             this.toggle();
         }
 
@@ -58,7 +58,7 @@ import data from '../../data/data.json';
 
     okClick(id) {
         let elements = document.querySelectorAll('ul > li > div');
-        	elements[id].classList.toggle('menu__item-ok');
+        	elements[id].classList.toggle('menu_item-ok');
     }
 
     addNewItem() {

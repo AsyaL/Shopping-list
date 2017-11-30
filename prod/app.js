@@ -121,7 +121,7 @@ var App = function () {
             event.preventDefault();
             var target = event.target;
 
-            if (target.classList.contains('menu__title')) {
+            if (target.classList.contains('menu_title')) {
                 this.toggle();
             }
 
@@ -153,7 +153,7 @@ var App = function () {
         key: 'okClick',
         value: function okClick(id) {
             var elements = document.querySelectorAll('ul > li > div');
-            elements[id].classList.toggle('menu__item-ok');
+            elements[id].classList.toggle('menu_item-ok');
         }
     }, {
         key: 'addNewItem',
@@ -213,12 +213,12 @@ var List = function () {
             this.el.innerHTML = '';
 
             var title = document.createElement('a');
-            title.classList.add('menu__title');
-            title.classList.add('menu__title-text');
+            title.classList.add('menu_title');
+            title.classList.add('menu_title-text');
             title.innerHTML = this.data.title;
 
             var list = document.createElement('ul');
-            list.classList.add('menu__list');
+            list.classList.add('menu_list');
 
             var arrItem = this.data.items;
             arrItem.sort(function (a, b) {
@@ -249,7 +249,7 @@ var List = function () {
                 item.appendChild(imgItem);
 
                 var itemName = document.createElement('div');
-                itemName.classList.add('menu__item');
+                itemName.classList.add('menu_item');
                 itemName.innerHTML = itemData.item;
                 item.appendChild(itemName);
 
