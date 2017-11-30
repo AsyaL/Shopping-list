@@ -43,6 +43,8 @@ import data from '../../data/data.json';
         }
 
         if (target.classList.contains('add_item-button')) {
+            if ((document.getElementById("itemCategory").value == '') || (document.getElementById("itemName").value == '')) { return false;}
+
             this.newItem.category = document.getElementById("itemCategory").value;
 			this.newItem.item = document.getElementById("itemName").value;
 			this.addNewItem();

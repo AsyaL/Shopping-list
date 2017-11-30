@@ -17,7 +17,18 @@ class List {
         let list = document.createElement('ul');
         list.classList.add('menu__list');
 
-        this.data.items.map((itemData, id) => {
+        let arrItem = this.data.items;
+        arrItem.sort(function (a, b) {
+            if (a.category > b.category) {
+                return 1;
+            }
+            if (a.category < b.category) {
+                return -1;
+            }
+                return 0;
+        });
+
+            arrItem.map((itemData, id) => {
             let item = document.createElement('li');
             item.classList.add('menu_list-li')
             list.appendChild(item);
@@ -52,6 +63,7 @@ class List {
 	            buttomDelete.setAttribute("data-id", id);
 	            buttomDelete.setAttribute("src", "image/delete.png");
 	            item.appendChild(buttomDelete);
+
         });
 
         this.el.appendChild(title);

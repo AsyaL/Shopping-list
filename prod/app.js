@@ -65,193 +65,262 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_list__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addItem_addItem__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_data_json__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_data_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__data_data_json__);
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _list = __webpack_require__(1);
 
+var _list2 = _interopRequireDefault(_list);
 
-class App {
-    constructor({ el }) {
-        this.data = __WEBPACK_IMPORTED_MODULE_2__data_data_json___default.a;
+var _addItem = __webpack_require__(2);
+
+var _addItem2 = _interopRequireDefault(_addItem);
+
+var _data = __webpack_require__(3);
+
+var _data2 = _interopRequireDefault(_data);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var App = function () {
+    function App(_ref) {
+        var el = _ref.el;
+
+        _classCallCheck(this, App);
+
+        this.data = _data2.default;
         this.el = el;
         this.newItem = { "category": " ",
             "item": " "
         };
         this._initEvents();
-        this.menu = new __WEBPACK_IMPORTED_MODULE_0__list_list__["a" /* default */]({
+        this.menu = new _list2.default({
             el: document.querySelector('.js-menu'),
             data: this.data
         });
 
-        this.form = new __WEBPACK_IMPORTED_MODULE_1__addItem_addItem__["a" /* default */]({
+        this.form = new _addItem2.default({
             el: el.querySelector('.form_add-item')
         });
     }
 
-    _initEvents() {
-        this.el.addEventListener('click', this._onCLick.bind(this));
-    }
-
-    _onCLick(event) {
-        event.preventDefault();
-        let target = event.target;
-
-        if (target.classList.contains('menu__title')) {
-            this.toggle();
+    _createClass(App, [{
+        key: '_initEvents',
+        value: function _initEvents() {
+            this.el.addEventListener('click', this._onCLick.bind(this));
         }
+    }, {
+        key: '_onCLick',
+        value: function _onCLick(event) {
+            event.preventDefault();
+            var target = event.target;
 
-        if (target.classList.contains('buttom_delete')) {
-            this.deleteClick(target.dataset.id);
+            if (target.classList.contains('menu__title')) {
+                this.toggle();
+            }
+
+            if (target.classList.contains('buttom_delete')) {
+                this.deleteClick(target.dataset.id);
+            }
+
+            if (target.classList.contains('buttom_ok')) {
+                this.okClick(target.dataset.id);
+            }
+
+            if (target.classList.contains('add_item-button')) {
+                if (document.getElementById("itemCategory").value == '' || document.getElementById("itemName").value == '') {
+                    return false;
+                }
+
+                this.newItem.category = document.getElementById("itemCategory").value;
+                this.newItem.item = document.getElementById("itemName").value;
+                this.addNewItem();
+            }
         }
-
-        if (target.classList.contains('buttom_ok')) {
-            this.okClick(target.dataset.id);
+    }, {
+        key: 'deleteClick',
+        value: function deleteClick(id) {
+            this.data.items.splice(id, 1);
+            this.menu.render();
         }
-
-        if (target.classList.contains('add_item-button')) {
-            this.newItem.category = document.getElementById("itemCategory").value;
-            this.newItem.item = document.getElementById("itemName").value;
-            this.addNewItem();
+    }, {
+        key: 'okClick',
+        value: function okClick(id) {
+            var elements = document.querySelectorAll('ul > li > div');
+            elements[id].classList.toggle('menu__item-ok');
         }
-    }
+    }, {
+        key: 'addNewItem',
+        value: function addNewItem() {
+            this.data.items.push(this.newItem);
+            this.menu.render();
+            this.newItem = { "category": " ",
+                "item": " "
+            };
+            document.getElementById("itemCategory").value = "";
+            document.getElementById("itemName").value = "";
+        }
+    }, {
+        key: 'toggle',
+        value: function toggle() {
+            this.el.classList.toggle('menu_close');
+        }
+    }]);
 
-    deleteClick(id) {
-        this.data.items.splice(id, 1);
-        this.menu.render();
-    }
-
-    okClick(id) {
-        let elements = document.querySelectorAll('ul > li > div');
-        elements[id].classList.toggle('menu__item-ok');
-    }
-
-    addNewItem() {
-        this.data.items.push(this.newItem);
-        this.menu.render();
-        this.newItem = { "category": " ",
-            "item": " "
-        };
-        document.getElementById("itemCategory").value = "";
-        document.getElementById("itemName").value = "";
-    }
-
-    toggle() {
-        this.el.classList.toggle('menu_close');
-    }
-
-}
+    return App;
+}();
 
 // export
-const app = new App({
+
+
+var app = new App({
     el: document.querySelector('.js-app')
 });
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-class List {
 
-    constructor(options) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var List = function () {
+    function List(options) {
+        _classCallCheck(this, List);
+
         this.el = options.el;
         this.data = options.data;
         this.render();
     }
 
-    render() {
-        this.el.innerHTML = '';
+    _createClass(List, [{
+        key: 'render',
+        value: function render() {
+            this.el.innerHTML = '';
 
-        let title = document.createElement('a');
-        title.classList.add('menu__title');
-        title.classList.add('menu__title-text');
-        title.innerHTML = this.data.title;
+            var title = document.createElement('a');
+            title.classList.add('menu__title');
+            title.classList.add('menu__title-text');
+            title.innerHTML = this.data.title;
 
-        let list = document.createElement('ul');
-        list.classList.add('menu__list');
+            var list = document.createElement('ul');
+            list.classList.add('menu__list');
 
-        this.data.items.map((itemData, id) => {
-            let item = document.createElement('li');
-            item.classList.add('menu_list-li');
-            list.appendChild(item);
+            var arrItem = this.data.items;
+            arrItem.sort(function (a, b) {
+                if (a.category > b.category) {
+                    return 1;
+                }
+                if (a.category < b.category) {
+                    return -1;
+                }
+                return 0;
+            });
 
-            let imgItem = document.createElement('img');
-            imgItem.classList.add('img_item');
-            if (itemData.category == 'food') {
-                imgItem.setAttribute("src", "image/meal.png");
-            } else if (itemData.category == 'forHome') {
-                imgItem.setAttribute("src", "image/home1.png");
-            } else if (itemData.category == 'other') {
-                imgItem.setAttribute("src", "image/other.png");
-            };
-            imgItem.setAttribute("data-category", itemData.category);
-            item.appendChild(imgItem);
+            arrItem.map(function (itemData, id) {
+                var item = document.createElement('li');
+                item.classList.add('menu_list-li');
+                list.appendChild(item);
 
-            let itemName = document.createElement('div');
-            itemName.classList.add('menu__item');
-            itemName.innerHTML = itemData.item;
-            item.appendChild(itemName);
+                var imgItem = document.createElement('img');
+                imgItem.classList.add('img_item');
+                if (itemData.category == 'food') {
+                    imgItem.setAttribute("src", "image/meal.png");
+                } else if (itemData.category == 'forHome') {
+                    imgItem.setAttribute("src", "image/home1.png");
+                } else if (itemData.category == 'other') {
+                    imgItem.setAttribute("src", "image/other.png");
+                };
+                imgItem.setAttribute("data-category", itemData.category);
+                item.appendChild(imgItem);
 
-            let buttomOk = document.createElement('input');
-            buttomOk.classList.add('buttom_ok');
-            buttomOk.setAttribute("type", "image");
-            buttomOk.setAttribute("src", "image/ok.png");
-            buttomOk.setAttribute("data-id", id);
-            item.appendChild(buttomOk);
+                var itemName = document.createElement('div');
+                itemName.classList.add('menu__item');
+                itemName.innerHTML = itemData.item;
+                item.appendChild(itemName);
 
-            let buttomDelete = document.createElement('input');
-            buttomDelete.classList.add('buttom_delete');
-            buttomDelete.setAttribute("type", "image");
-            buttomDelete.setAttribute("data-id", id);
-            buttomDelete.setAttribute("src", "image/delete.png");
-            item.appendChild(buttomDelete);
-        });
+                var buttomOk = document.createElement('input');
+                buttomOk.classList.add('buttom_ok');
+                buttomOk.setAttribute("type", "image");
+                buttomOk.setAttribute("src", "image/ok.png");
+                buttomOk.setAttribute("data-id", id);
+                item.appendChild(buttomOk);
 
-        this.el.appendChild(title);
-        this.el.appendChild(list);
-    }
+                var buttomDelete = document.createElement('input');
+                buttomDelete.classList.add('buttom_delete');
+                buttomDelete.setAttribute("type", "image");
+                buttomDelete.setAttribute("data-id", id);
+                buttomDelete.setAttribute("src", "image/delete.png");
+                item.appendChild(buttomDelete);
+            });
 
-}
+            this.el.appendChild(title);
+            this.el.appendChild(list);
+        }
+    }]);
+
+    return List;
+}();
 
 // Export
-/* harmony default export */ __webpack_exports__["a"] = (List);
+
+
+exports.default = List;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-class AddItem {
 
-	constructor({ el, data }) {
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AddItem = function () {
+	function AddItem(_ref) {
+		var el = _ref.el,
+		    data = _ref.data;
+
+		_classCallCheck(this, AddItem);
+
 		this.el = el;
 		this.render();
 	}
 
-	render() {
-		this.el.innerHTML = `
-			<form>
-			   <input name="name" placeholder="Product Name" class="add_item-input" id="itemName" required  autocomplete="off"/>
-			   <select name="category" class="add_item-input" id="itemCategory" required>
-	   				<option value="food">food</option>
-	    			<option value="forHome">home goods</option>
-	    			<option value="other">other</option>
-   				</select>
-			   <input name="submit" class="add_item-button" type="submit" value="Add" />
-			<form>`;
-	}
-}
+	_createClass(AddItem, [{
+		key: "render",
+		value: function render() {
+			this.el.innerHTML = "\n\t\t\t<form>\n\t\t\t   <input name=\"name\" placeholder=\"Product Name\" class=\"add_item-input\" id=\"itemName\" required  autocomplete=\"off\"/>\n\t\t\t   <select name=\"category\" class=\"add_item-input\" id=\"itemCategory\" required>\n\t   \t\t\t\t<option value=\"food\">food</option>\n\t    \t\t\t<option value=\"forHome\">home goods</option>\n\t    \t\t\t<option value=\"other\">other</option>\n   \t\t\t\t</select>\n\t\t\t   <input name=\"submit\" class=\"add_item-button\" type=\"submit\" value=\"Add\" />\n\t\t\t<form>";
+		}
+	}]);
+
+	return AddItem;
+}();
 
 // Export
-/* harmony default export */ __webpack_exports__["a"] = (AddItem);
+
+
+exports.default = AddItem;
 
 /***/ }),
 /* 3 */
